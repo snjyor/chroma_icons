@@ -2,6 +2,9 @@ import { NextResponse } from 'next/server'
 import fs from 'fs/promises'
 import path from 'path'
 
+export const dynamic = 'force-dynamic' // 强制动态渲染
+export const runtime = 'nodejs' // 指定 Node.js 运行时
+
 export async function GET(request: Request) {
     const { searchParams } = new URL(request.url)
     const category = searchParams.get('category')

@@ -5,5 +5,11 @@
       "src": "package.json",
       "use": "@vercel/next"
     }
-  ]
+  ],
+  "functions": {
+    "api/icons/*.ts": {
+      "memory": 1024,
+      "maxDuration": 10
+    }
+  }
 } 
