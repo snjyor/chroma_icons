@@ -105,7 +105,13 @@ export default function IconDetail({ name, category, onClose }: IconDetailProps)
 
                 {/* 主容器 */}
                 <motion.div 
-                    className="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full mx-4 relative"
+                    className="
+                        bg-white/80 dark:bg-gray-800/80 
+                        backdrop-blur-xl
+                        rounded-2xl max-w-2xl w-full mx-4 relative
+                        border border-white/20 dark:border-white/10
+                        shadow-lg shadow-black/5 dark:shadow-white/5
+                    "
                     variants={modalVariants}
                     initial="hidden"
                     animate="visible"
