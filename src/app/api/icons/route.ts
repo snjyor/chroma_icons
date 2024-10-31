@@ -26,7 +26,8 @@ export async function GET(request: Request) {
         })
         .map(file => ({
             name: file.replace('.svg', ''),
-            src: `/${category}/${file}`
+            src: `/${category}/${file}`,
+            category: category
         }))
 
         return NextResponse.json({ icons })

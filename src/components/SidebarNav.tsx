@@ -5,7 +5,13 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
-const sidebarNavItems = ["Finance", "Weather", "Emoji", "Social"]
+const sidebarNavItems = [
+    "Finance", 
+    "Weather Color", 
+    "Weather", 
+    "Emoji", 
+    "Social"
+]
 
 export function SidebarNav() {
     const pathname = usePathname()
@@ -14,7 +20,7 @@ export function SidebarNav() {
         <nav className="w-48 py-1">
             <div className="space-y-0.5">
                 {sidebarNavItems.map((item) => {
-                    const isActive = pathname === `/icons/${item.toLowerCase()}`
+                    const isActive = pathname === `/icons/${item.replace(' ', '').toLowerCase()}`
                     
                     return (
                         <div key={item} className="relative">
@@ -30,7 +36,7 @@ export function SidebarNav() {
                             )}
                             
                             <Link
-                                href={`/icons/${item.toLowerCase()}`}
+                                href={`/icons/${item.replace(' ', '').toLowerCase()}`}
                                 className={cn(
                                     "relative block px-4 py-1 rounded-lg transition-all duration-200",
                                     "hover:bg-gray-50 dark:hover:bg-gray-800/50",

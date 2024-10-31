@@ -8,7 +8,7 @@ export default function IconPage() {
     const router = useRouter()
     const iconName = params.iconName as string
     
-    const routeName = "finance"
+    const routeName = "weather"
     
     const handleClose = () => {
         router.push(`/icons/${routeName}`)

@@ -28,6 +28,7 @@ const Navbar = () => {
     const navItems = [
         { href: '/icons', label: '3D Icons' },
         { href: '/2d-icons', label: '2D Icons' },
+        { href: '/blog', label: 'Blog'}
     ];
 
     return (
