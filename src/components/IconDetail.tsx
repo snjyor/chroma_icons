@@ -4,12 +4,38 @@ import Image from 'next/image'
 import { Button } from '@/components/ui/button'
 import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
-import { motion, AnimatePresence } from 'framer-motion'
+import { motion, AnimatePresence, Variants, Transition } from 'framer-motion'
 
 interface IconDetailProps {
     name: string
     category: string
     onClose: () => void
+}
+
+// 定义过渡动画配置
+const springTransition: Transition = {
+    type: "spring",
+    damping: 30,
+    stiffness: 300
+}
+
+// 定义动画变体
+const modalVariants: Variants = {
+    hidden: { 
+        y: 20, 
+        opacity: 0, 
+        scale: 0.98 
+    },
+    visible: { 
+        y: 0, 
+        opacity: 1, 
+        scale: 1
+    },
+    exit: { 
+        y: 20, 
+        opacity: 0, 
+        scale: 0.98 
+    }
 }
 
 export default function IconDetail({ name, category, onClose }: IconDetailProps) {
@@ -70,7 +96,7 @@ export default function IconDetail({ name, category, onClose }: IconDetailProps)
             >
                 {/* 背景遮罩 */}
                 <motion.div 
-                    className="absolute inset-0 bg-black/50 backdrop-blur-sm"
+                    className="absolute inset-0 backdrop-blur-sm"
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     exit={{ opacity: 0 }}
@@ -80,18 +106,11 @@ export default function IconDetail({ name, category, onClose }: IconDetailProps)
                 {/* 主容器 */}
                 <motion.div 
                     className="bg-white dark:bg-gray-800 rounded-2xl max-w-2xl w-full mx-4 relative"
-                    initial={{ y: 20, opacity: 0, scale: 0.98 }}
-                    animate={{ 
-                        y: 0, 
-                        opacity: 1, 
-                        scale: 1,
-                        transition: {
-                            type: "spring",
-                            damping: 30,
-                            stiffness: 300
-                        }
-                    }}
-                    exit={{ y: 20, opacity: 0, scale: 0.98 }}
+                    variants={modalVariants}
+                    initial="hidden"
+                    animate="visible"
+                    exit="exit"
+                    transition={springTransition}
                 >
                     <div className="relative flex flex-col items-center justify-center p-8">
                         {/* 关闭按钮 */}
@@ -127,7 +146,6 @@ export default function IconDetail({ name, category, onClose }: IconDetailProps)
                                     width={400}
                                     height={400}
                                     alt={`${name} icon preview`}
-                                    className="transition-transform duration-300"
                                     priority
                                 />
                             </motion.div>
@@ -141,10 +159,13 @@ export default function IconDetail({ name, category, onClose }: IconDetailProps)
                             transition={{ delay: 0.2 }}
                         >
                             <div className="flex gap-3">
-                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <motion.div 
+                                    whileHover={{ scale: 1.05 }} 
+                                    whileTap={{ scale: 0.95 }}
+                                >
                                     <Button
                                         className={`
-                                            w-32 h-9 rounded-full transition-all duration-200 text-sm font-medium
+                                            w-32 h-9 rounded-full transition-colors duration-200 text-sm font-medium
                                             ${copied 
                                                 ? 'bg-green-500 text-white hover:bg-green-600' 
                                                 : 'bg-gray-100 text-gray-700 hover:bg-gray-200 dark:bg-gray-700 dark:text-gray-200 dark:hover:bg-gray-800'
@@ -152,21 +173,26 @@ export default function IconDetail({ name, category, onClose }: IconDetailProps)
                                         `}
                                         onClick={handleCopy}
                                     >
-                                        <motion.span
-                                            key={copied ? 'copied' : 'copy'}
-                                            initial={{ y: 10, opacity: 0 }}
-                                            animate={{ y: 0, opacity: 1 }}
-                                            exit={{ y: -10, opacity: 0 }}
-                                            transition={{ duration: 0.15 }}
-                                        >
-                                            {copied ? 'Copied!' : 'Copy SVG'}
-                                        </motion.span>
+                                        <AnimatePresence mode="wait">
+                                            <motion.span
+                                                key={copied ? 'copied' : 'copy'}
+                                                initial={{ y: 10, opacity: 0 }}
+                                                animate={{ y: 0, opacity: 1 }}
+                                                exit={{ y: -10, opacity: 0 }}
+                                                transition={{ duration: 0.15 }}
+                                            >
+                                                {copied ? 'Copied!' : 'Copy SVG'}
+                                            </motion.span>
+                                        </AnimatePresence>
                                     </Button>
                                 </motion.div>
 
-                                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+                                <motion.div 
+                                    whileHover={{ scale: 1.05 }} 
+                                    whileTap={{ scale: 0.95 }}
+                                >
                                     <Button
-                                        className="w-32 h-9 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-all duration-200 text-sm font-medium"
+                                        className="w-32 h-9 rounded-full bg-blue-500 text-white hover:bg-blue-600 transition-colors duration-200 text-sm font-medium"
                                         onClick={handleDownload}
                                     >
                                         Download
