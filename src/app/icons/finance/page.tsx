@@ -8,28 +8,24 @@ import { Dialog, DialogContent, DialogTrigger } from "@/components/ui/dialog"
 interface IconCardProps {
   name: string
   src: string
-  svgSource: string
 }
 
-function IconCard({ name, src, svgSource }: IconCardProps) {
+function IconCard({ name, src }: IconCardProps) {
   const [copied, setCopied] = useState(false)
   const [isOpen, setIsOpen] = useState(false)
 
   const handleCopy = async (e: React.MouseEvent) => {
     e.stopPropagation()
     try {
-        // 确保文档获得焦点
         window.focus()
         
         const response = await fetch(`/api/icons/copyicon?icon=${name}&category=finance`)
         const data = await response.json()
         
-        // 方案1：使用 navigator.clipboard API 并处理错误
         try {
             await navigator.clipboard.writeText(data.svgSource)
             setCopied(true)
-        } catch (clipboardError) {
-            // 如果 clipboard API 失败，回退到传统方法
+        } catch (_) {
             const textarea = document.createElement('textarea')
             textarea.value = data.svgSource
             textarea.style.position = 'fixed'
@@ -48,7 +44,6 @@ function IconCard({ name, src, svgSource }: IconCardProps) {
             }
         }
         
-        // 设置复制状态
         setTimeout(() => setCopied(false), 2000)
     } catch (err) {
         console.error('Failed to copy:', err)

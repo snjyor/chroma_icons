@@ -28,6 +28,6 @@ export async function GET(request: Request) {
 
         return NextResponse.json({ icons })
     } catch (error) {
-        return NextResponse.json({ error: 'Failed to read directory' }, { status: 500 })
+        return NextResponse.json({ error: `Failed to read directory, ${error}` }, { status: 500 })
     }
 }
