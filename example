@@ -1,0 +1,23 @@
+import { ArrowIcon } from 'my-icon-library';
+
+function App() {
+  return (
+    <div>
+      {/* 基础使用 */}
+      <ArrowIcon size={24} color="blue" />
+      
+      {/* 带旋转 */}
+      <ArrowIcon rotate={45} size={32} />
+      
+      {/* 动画效果 */}
+      <ArrowIcon spin size={24} />
+      
+      {/* 事件处理 */}
+      <ArrowIcon 
+        size={24}
+        onClick={() => console.log('clicked')}
+        onMouseEnter={() => console.log('hover')}
+      />
+    </div>
+  );
+} 
