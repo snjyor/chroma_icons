@@ -12,6 +12,16 @@ const Footer = () => {
         hover: { scale: 1.1, transition: { duration: 0.2 } }
     };
 
+    const dotAnimation = {
+        initial: { scale: 0, opacity: 0 },
+        animate: { scale: 1, opacity: 0.8 },
+        transition: { 
+            delay: 0.1,
+            duration: 0.2,
+            ease: "easeOut"
+        }
+    };
+
     const data = {
         title: 'Chroma Icons',
         description: 'Chroma Icons is a collection of high-quality, customizable icons for your next project. It includes a variety of icons for different categories, including finance, travel, social media, and more.',
@@ -35,16 +45,16 @@ const Footer = () => {
                         {data.title}
                     </motion.h3>
                     <div className='flex space-x-6'>
-                        <motion.a href={`mailto:${data.email}`} variants={iconVariants} whileHover="hover">
+                        <motion.a href={`mailto:${data.email}`} whileHover="hover" {...dotAnimation}>
                             <Mail className="text-gray-600 hover:text-gray-800 size-5" />
                         </motion.a>
-                        <motion.a href={data.twitter} target="_blank" rel="noopener noreferrer" variants={iconVariants} whileHover="hover">
+                        <motion.a href={data.twitter} target="_blank" rel="noopener noreferrer" whileHover="hover" {...dotAnimation}>
                             <Twitter className="text-gray-600 hover:text-gray-800 size-5" />
                         </motion.a>
-                        <motion.a href={data.github} target="_blank" rel="noopener noreferrer" variants={iconVariants} whileHover="hover">
+                        <motion.a href={data.github} target="_blank" rel="noopener noreferrer" whileHover="hover" {...dotAnimation}>
                             <Github className="text-gray-600 hover:text-gray-800 size-5" />
                         </motion.a>
-                        <motion.div className="relative group" variants={iconVariants} whileHover="hover">
+                        <motion.div className="relative group" whileHover="hover" {...dotAnimation}>
                             <AlertCircle className="text-gray-600 hover:text-gray-800 size-5 cursor-pointer" onClick={() => window.open('https://github.com/snjyor', '_blank')} />
                             <span className="absolute bottom-full left-1/2 transform -translate-x-1/2 bg-gray-800 text-white text-xs rounded py-1 px-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                                 Feedback
