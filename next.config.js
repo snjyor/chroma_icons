@@ -1,5 +1,11 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  output: 'standalone',
+  experimental: {
+    turbotrace: {
+      contextDirectory: process.cwd(),
+    }
+  },
   webpack(config) {
     config.module.rules.push({
       test: /\.svg$/,
@@ -7,18 +13,9 @@ const nextConfig = {
     });
     return config;
   },
-  output: 'standalone',
-  experimental: {
-    turbotrace: {
-      contextDirectory: process.cwd(),
-    },
-  },
   images: {
-    minimumCacheTTL: 0,
-    dangerouslyAllowSVG: true,
-    contentDispositionType: 'attachment',
-    contentSecurityPolicy: "default-src 'self'; script-src 'none'; sandbox;",
-  },
+    domains: ['your-domain.com'],
+  }
 };
 
 module.exports = nextConfig; 
