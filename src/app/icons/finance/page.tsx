@@ -82,14 +82,14 @@ function IconCard({ name, src }: IconCardProps) {
       {/* 悬停时显示的操作按钮 */}
       <div className="absolute bottom-1 flex flex-row items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-all duration-300 translate-y-2 group-hover:translate-y-0">
         <Button 
-          className={`w-24 h-7 rounded-full ${copied ? 'bg-green-500 text-white' : 'bg-white/90 text-gray-600'}`}
+          className={`w-24 h-7 rounded-full transition-colors duration-200 ${copied ? 'bg-green-500 text-white' : 'bg-white/90 text-gray-600 hover:bg-white/50'}`}
           variant="ghost"
           onClick={handleCopy}
         >
           {copied ? 'Copied' : 'Copy SVG'}
         </Button>
         <Button 
-          className="w-24 h-7 rounded-full bg-white/90 text-gray-600"
+          className="w-24 h-7 rounded-full bg-white/90 text-gray-600 hover:bg-white/50"
           variant="ghost"
           onClick={handleDownload}
         >
