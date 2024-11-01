@@ -6,18 +6,16 @@ import IconDetail from '@/components/IconDetail'
 export default function IconPage() {
     const params = useParams()
     const router = useRouter()
-    const iconName = params.iconName as string
-    
-    const routeName = "finance"
-    
+    const { category, iconName } = params
+
     const handleClose = () => {
-        router.push(`/icons/${routeName}`)
+        router.push(`/icons/${category}`)
     }
 
     return (
         <IconDetail 
-            name={iconName}
-            category={routeName}
+            name={iconName as string}
+            category={category as string}
             onClose={handleClose}
         />
     )

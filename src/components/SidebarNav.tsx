@@ -5,12 +5,17 @@ import Link from "next/link"
 import { usePathname } from "next/navigation"
 import { cn } from "@/lib/utils"
 
-const sidebarNavItems = [
-    "Finance", 
-    "Weather Color", 
-    "Weather", 
-    "Emoji", 
-    "Social"
+interface Category {
+    id: string
+    name: string
+}
+
+const categories: Category[] = [
+    { id: "finance", name: "Finance" },
+    { id: "weathercolor", name: "Weather Color" },
+    { id: "weather", name: "Weather" },
+    { id: "emoji", name: "Emoji" },
+    { id: "social", name: "Social" }
 ]
 
 export function SidebarNav() {
@@ -19,12 +24,11 @@ export function SidebarNav() {
     return (
         <nav className="w-48 py-1">
             <div className="space-y-0.5">
-                {sidebarNavItems.map((item) => {
-                    const isActive = pathname === `/icons/${item.replace(' ', '').toLowerCase()}`
+                {categories.map((category) => {
+                    const isActive = pathname === `/icons/${category.id}` || pathname.startsWith(`/icons/${category.id}/`)
                     
                     return (
-                        <div key={item} className="relative">
-                            {/* 活动指示器 */}
+                        <div key={category.id} className="relative">
                             {isActive && (
                                 <motion.div
                                     layoutId="activeIndicator"
@@ -36,7 +40,7 @@ export function SidebarNav() {
                             )}
                             
                             <Link
-                                href={`/icons/${item.replace(' ', '').toLowerCase()}`}
+                                href={`/icons/${category.id}`}
                                 className={cn(
                                     "relative block px-4 py-1 rounded-lg transition-all duration-200",
                                     "hover:bg-gray-50 dark:hover:bg-gray-800/50",
@@ -54,17 +58,15 @@ export function SidebarNav() {
                                         damping: 20 
                                     }}
                                 >
-                                    {/* 文字 */}
                                     <span className={cn(
                                         "text-base tracking-wide transition-colors duration-200",
                                         isActive 
                                             ? "font-semibold text-blue-600 dark:text-blue-400" 
                                             : "font-medium text-gray-600 dark:text-gray-500 hover:text-gray-900 dark:hover:text-gray-100"
                                     )}>
-                                        {item}
+                                        {category.name}
                                     </span>
 
-                                    {/* 活动状态的点 */}
                                     {isActive && (
                                         <motion.span
                                             className="ml-2 w-1 h-1 rounded-full bg-blue-500 dark:bg-blue-400"

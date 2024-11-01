@@ -19,7 +19,7 @@ export function IconCard({ name, src, category }: IconCardProps) {
         try {
             window.focus()
             
-            const response = await fetch(`/api/icons/copyicon?icon=${name}&category=${category}`)
+            const response = await fetch(`/api/copyicon?icon=${name}&category=${category}`)
             const data = await response.json()
             
             try {

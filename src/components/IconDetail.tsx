@@ -49,7 +49,7 @@ export default function IconDetail({ name, category, onClose }: IconDetailProps)
 
     const handleCopy = async () => {
         try {
-        const response = await fetch(`/api/icons/copyicon?icon=${name}&category=${category}`)
+        const response = await fetch(`/api/copyicon?icon=${name}&category=${category}`)
         const data = await response.json()
         
         try {
