@@ -9,7 +9,7 @@ export default function Finance() {
 
   useEffect(() => {
     const fetchIcons = async () => {
-      const response = await fetch('/api/icons?category=finance')
+      const response = await fetch('/api/geticons?category=finance')
       const data = await response.json()
       setIcons(data.icons)
     }

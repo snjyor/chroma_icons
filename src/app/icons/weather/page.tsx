@@ -9,7 +9,7 @@ export default function Weather() {
 
     useEffect(() => {
         const fetchIcons = async () => {
-            const response = await fetch('/api/icons?category=weather')
+            const response = await fetch('/api/geticons?category=weather')
             const data = await response.json()
             setIcons(data.icons)
         }
