@@ -8,16 +8,16 @@ export default function IconPage() {
     const router = useRouter()
     const iconName = params.iconName as string
     
-    const routeName = "weathercolor"
+    const category = "weathercolor"
     
     const handleClose = () => {
-        router.push(`/icons/${routeName}`)
+        router.push(`/icons/${category}`)
     }
 
     return (
         <IconDetail 
             name={iconName}
-            category={routeName}
+            category={category}
             onClose={handleClose}
         />
     )
