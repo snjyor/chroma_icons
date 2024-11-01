@@ -32,7 +32,7 @@ export async function GET(request: Request) {
             // 检查是否是目录不存在的错误
             if ((error as NodeJS.ErrnoException).code === 'ENOENT') {
                 // 如果目录不存在，返回空数组
-                return NextResponse.json({ icons: [] })
+                return NextResponse.json({ icons: [{ name: 'No icons found', src: '', category: category }] })
             }
             
             // 其他错误则返回错误信息
